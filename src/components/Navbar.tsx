@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "@/components/ThemeProvider";
 
 const navLinks = [
     { href: "/", label: "Home" },
@@ -84,6 +85,9 @@ export default function Navbar() {
                                 </svg>
                                 <span>Admin</span>
                             </Link>
+
+                            {/* Theme Toggle */}
+                            <ThemeToggle />
 
                             {/* CTA Button */}
                             <Link
