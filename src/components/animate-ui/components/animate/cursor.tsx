@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { motion, useMotionValue, AnimatePresence, type MotionValue } from 'framer-motion';
+import { motion, useMotionValue, useSpring, AnimatePresence, type MotionValue } from 'framer-motion';
 
 // --- Types ---
 interface CursorContextType {
@@ -117,12 +117,10 @@ export const Cursor = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isClicking, setIsClicking] = useState(false);
 
-    // Optimized for "100% tracking" speed - direct mapping for 1:1 response
-    // const springConfig = { damping: 30, stiffness: 700, mass: 0.1 };
-    // const x = useSpring(cursorX, springConfig);
-    // const y = useSpring(cursorY, springConfig);
-    const x = cursorX;
-    const y = cursorY;
+    // Premium smooth spring — silky trailing with zero overshoot
+    const springConfig = { stiffness: 450, damping: 35, mass: 0.15 };
+    const x = useSpring(cursorX, springConfig);
+    const y = useSpring(cursorY, springConfig);
 
     const [isTextHover, setIsTextHover] = useState(false);
 
