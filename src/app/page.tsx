@@ -1,101 +1,181 @@
+import ScrollCanvas from "@/components/ScrollCanvas";
+import Footer from "@/components/Footer";
+import VideoPlayer from "@/components/VideoPlayer";
+import ParticleField from "@/components/ParticleField";
+import MagneticCursor from "@/components/MagneticCursor";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main className="relative">
+      {/* Custom Cursor Effect */}
+      {/* Custom Cursor Effect removed - using GlobalCursor now */}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Floating Particles Background */}
+      <ParticleField count={40} />
+
+      {/* Gradient overlay at top for polish */}
+      <div className="fixed top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0d0d0d] to-transparent z-10 pointer-events-none" />
+
+      {/* Main Scroll Experience */}
+      <ScrollCanvas />
+
+      {/* Features Section */}
+      <section className="relative bg-[#0d0d0d] py-24 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-4">
+            Why iPhone 17 Pro Max?
+          </h2>
+          <p className="text-white/60 text-center max-w-2xl mx-auto mb-16">
+            The most advanced iPhone ever, packed with groundbreaking technology.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Feature Card 1 - with Magnetic Effect */}
+            <MagneticCursor>
+              <div className="group p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-white/20 transition-all backdrop-blur-sm">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-6">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">A19 Bionic Chip</h3>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  The fastest chip ever in a smartphone with breakthrough performance and efficiency.
+                </p>
+              </div>
+            </MagneticCursor>
+
+            {/* Feature Card 2 - with Magnetic Effect */}
+            <MagneticCursor>
+              <div className="group p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-white/20 transition-all backdrop-blur-sm">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center mb-6">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">Pro Camera System</h3>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  48MP main camera with 5x optical zoom. Capture stunning photos and 8K video.
+                </p>
+              </div>
+            </MagneticCursor>
+
+            {/* Feature Card 3 - with Magnetic Effect */}
+            <MagneticCursor>
+              <div className="group p-8 rounded-3xl bg-gradient-to-b from-white/5 to-transparent border border-white/10 hover:border-white/20 transition-all backdrop-blur-sm">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center mb-6">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">All-Day Battery</h3>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Up to 29 hours of video playback. The longest battery life ever in an iPhone.
+                </p>
+              </div>
+            </MagneticCursor>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-16 text-center">
+            <Link
+              href="/specs"
+              className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              <span>View all specifications</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Video Section */}
+      <section className="relative bg-[#0d0d0d] py-24 px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-orange-400 text-sm font-medium tracking-wider uppercase mb-4">
+              Watch
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Experience the Magic
+            </h2>
+            <p className="text-white/60 max-w-2xl mx-auto">
+              See iPhone 17 Pro Max in action. Discover what makes it the most powerful iPhone ever.
+            </p>
+          </div>
+
+          <VideoPlayer />
+        </div>
+      </section>
+
+
+      {/* Color Options Preview */}
+      <section className="relative bg-[#0d0d0d] py-24 px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                Four stunning<br />titanium finishes.
+              </h2>
+              <p className="text-white/60 text-lg mb-8 max-w-md">
+                iPhone 17 Pro Max features a titanium design with a refined brushed texture
+                and four beautiful colors to match your style.
+              </p>
+              <Link
+                href="/design"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors"
+              >
+                <span>Explore the design</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+            <div className="relative">
+              <Image
+                src="/images/iphone_colors_lineup_1769248917594.png"
+                alt="iPhone 17 Pro Max Colors"
+                width={600}
+                height={600}
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="relative bg-gradient-to-b from-[#0d0d0d] to-[#1a1a1a] py-32 px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            Ready to upgrade?
+          </h2>
+          <p className="text-white/60 text-xl mb-10 max-w-2xl mx-auto">
+            Get the most advanced iPhone ever. Starting at $1,199 or $49.95/mo. with Apple Card.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/buy"
+              className="px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full transition-all hover:scale-105 shadow-lg shadow-blue-500/20"
+            >
+              Buy Now
+            </Link>
+            <Link
+              href="/specs"
+              className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full transition-all"
+            >
+              Learn More
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
   );
 }
