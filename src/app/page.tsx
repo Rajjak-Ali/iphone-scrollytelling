@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import VideoPlayer from "@/components/VideoPlayer";
 import ParticleField from "@/components/ParticleField";
 import MagneticCursor from "@/components/MagneticCursor";
+import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -81,14 +82,13 @@ export default function Home() {
 
           {/* CTA */}
           <div className="mt-16 text-center">
-            <Link
-              href="/specs"
-              className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              <span>View all specifications</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+            <Link href="/specs">
+              <LiquidButton variant="ghost" size="lg" className="rounded-full px-8 text-blue-400 hover:text-white [--liquid-button-color:#3b82f6] gap-2">
+                <span>View all specifications</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </LiquidButton>
             </Link>
           </div>
         </div>
@@ -126,14 +126,13 @@ export default function Home() {
                 iPhone 17 Pro Max features a titanium design with a refined brushed texture
                 and four beautiful colors to match your style.
               </p>
-              <Link
-                href="/design"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors"
-              >
-                <span>Explore the design</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+              <Link href="/design">
+                <LiquidButton variant="default" size="lg" className="rounded-full px-6 gap-2 [--liquid-button-background-color:#1a1a2e] [--liquid-button-color:#6366f1]">
+                  <span>Explore the design</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </LiquidButton>
               </Link>
             </div>
             <div className="relative">
@@ -159,17 +158,15 @@ export default function Home() {
             Get the most advanced iPhone ever. Starting at $1,199 or $49.95/mo. with Apple Card.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/buy"
-              className="px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full transition-all hover:scale-105 shadow-lg shadow-blue-500/20"
-            >
-              Buy Now
+            <Link href="/buy">
+              <LiquidButton variant="secondary" size="lg" className="rounded-full px-8 py-4 h-auto text-base font-semibold shadow-lg shadow-blue-500/20 [--liquid-button-background-color:#3b82f6] [--liquid-button-color:#1d4ed8] border-blue-500/30">
+                Buy Now
+              </LiquidButton>
             </Link>
-            <Link
-              href="/specs"
-              className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full transition-all"
-            >
-              Learn More
+            <Link href="/specs">
+              <LiquidButton variant="ghost" size="lg" className="rounded-full px-8 py-4 h-auto text-base font-semibold [--liquid-button-background-color:rgba(255,255,255,0.1)] [--liquid-button-color:rgba(255,255,255,0.2)] border border-white/10">
+                Learn More
+              </LiquidButton>
             </Link>
           </div>
         </div>
