@@ -13,7 +13,7 @@
    Collecting build traces ...
 
 Route (app)                              Size     First Load JS
-Γöî Γùï /                                    14 kB           160 kB
+Γöî Γùï /                                    16.1 kB         162 kB
 Γö£ Γùï /_not-found                          873 B          88.2 kB
 Γö£ Γùï /admin                               4.98 kB         142 kB
 Γö£ Γùï /airpods                             3.78 kB         149 kB

@@ -5,6 +5,10 @@ import ParticleField from "@/components/ParticleField";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import MagneticCursor from "@/components/MagneticCursor";
 import ScrollReveal from "@/components/ScrollReveal";
+import ScrollProgress from "@/components/ScrollProgress";
+import TextMarquee from "@/components/TextMarquee";
+import AnimatedCounterSection from "@/components/AnimatedCounter";
+import HorizontalShowcase from "@/components/HorizontalShowcase";
 import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,6 +17,9 @@ export default function Home() {
   return (
     <main className="relative">
       {/* Custom Cursor Effect removed - using GlobalCursor now */}
+
+      {/* Scroll Progress Bar */}
+      <ScrollProgress />
 
       {/* Motion Background — animated gradient orbs */}
       <AnimatedBackground />
@@ -110,6 +117,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Scrolling Text Marquee */}
+      <section className="relative bg-[#0d0d0d]/90 py-8 overflow-hidden border-t border-white/5">
+        <TextMarquee text="iPhone 17 Pro Max" speed={25} />
+      </section>
+
       {/* Video Section */}
       <section className="relative bg-[#0d0d0d]/90 py-24 px-6 lg:px-8 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
@@ -137,6 +149,8 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Animated Stats Counter */}
+      <AnimatedCounterSection />
 
       {/* Color Options Preview */}
       <section className="relative bg-[#0d0d0d]/90 py-24 px-6 lg:px-8 border-t border-white/5">
@@ -175,6 +189,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Horizontal Scrolling Feature Showcase */}
+      <HorizontalShowcase />
 
       {/* CTA Section */}
       <section className="relative bg-gradient-to-b from-[#0d0d0d]/90 to-[#1a1a1a] py-32 px-6 lg:px-8">
