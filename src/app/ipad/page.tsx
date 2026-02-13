@@ -1,105 +1,134 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
 
+const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.7, delay: i * 0.15, ease: [0.25, 0.4, 0.25, 1] as const },
+    }),
+};
+
+const scaleIn = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: [0.25, 0.4, 0.25, 1] as const } },
+};
+
 export default function IPadPage() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"],
-    });
-
-    // Parallax transforms
-    const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.2]);
-    const opacity1 = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-    const opacity2 = useTransform(scrollYProgress, [0.3, 0.6], [0, 1]);
-    const opacity3 = useTransform(scrollYProgress, [0.6, 0.9], [0, 1]);
-
     return (
         <main className="relative bg-[#0d0d0d]">
-            {/* Hero Section with Parallax */}
-            <div ref={containerRef} className="relative" style={{ height: "400vh" }}>
-                <div className="sticky top-0 h-screen overflow-hidden">
-                    {/* Background Gradient */}
-                    <motion.div
-                        style={{ opacity: opacity1 }}
-                        className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-pink-900/20"
-                    />
+            {/* Hero Section */}
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+                {/* Animated background gradient */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 1.2 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-pink-900/20"
+                />
 
-                    {/* Main Content */}
-                    <div className="relative h-full flex items-center justify-center px-6">
-                        <div className="text-center max-w-5xl">
-                            <motion.div style={{ opacity: opacity1, scale }}>
-                                <motion.h1
-                                    className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6"
-                                    initial={{ y: 50, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ duration: 0.8 }}
-                                >
-                                    iPad Pro
-                                </motion.h1>
-                                <motion.p
-                                    className="text-2xl md:text-4xl text-white/80 mb-8"
-                                    initial={{ y: 30, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ duration: 0.8, delay: 0.2 }}
-                                >
-                                    Supercharged by M2
-                                </motion.p>
-                            </motion.div>
+                {/* Floating orbs */}
+                <motion.div
+                    animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+                    transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                    className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
+                />
+                <motion.div
+                    animate={{ y: [0, 15, 0], x: [0, -15, 0] }}
+                    transition={{ repeat: Infinity, duration: 8, ease: "easeInOut", delay: 1 }}
+                    className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
+                />
 
-                            <motion.div style={{ opacity: opacity2 }} className="absolute inset-0 flex items-center justify-center">
-                                <div className="text-center">
-                                    <h2 className="text-5xl md:text-7xl font-bold text-white mb-4">
-                                        Liquid Retina Display
-                                    </h2>
-                                    <p className="text-xl md:text-3xl text-white/70">
-                                        12.9&quot; of pure brilliance
-                                    </p>
-                                </div>
-                            </motion.div>
-
-                            <motion.div style={{ opacity: opacity3 }} className="absolute inset-0 flex items-center justify-center">
-                                <div className="text-center">
-                                    <h2 className="text-5xl md:text-7xl font-bold text-white mb-4">
-                                        Apple Pencil
-                                    </h2>
-                                    <p className="text-xl md:text-3xl text-white/70">
-                                        Precision meets creativity
-                                    </p>
-                                </div>
-                            </motion.div>
-                        </div>
-                    </div>
-
-                    {/* Scroll Indicator */}
-                    <motion.div
-                        style={{ opacity: opacity1 }}
-                        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+                    <motion.p
+                        custom={0}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-purple-400 text-sm font-medium tracking-wider uppercase mb-6"
                     >
-                        <span className="text-white/60 text-sm">Scroll to explore</span>
-                        <motion.div
-                            animate={{ y: [0, 10, 0] }}
-                            transition={{ repeat: Infinity, duration: 1.5 }}
-                            className="w-6 h-10 rounded-full border-2 border-white/40 flex items-start justify-center p-2"
+                        The ultimate iPad experience
+                    </motion.p>
+                    <motion.h1
+                        custom={1}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6"
+                    >
+                        iPad Pro
+                    </motion.h1>
+                    <motion.p
+                        custom={2}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-2xl md:text-4xl text-white/80 mb-4"
+                    >
+                        Supercharged by M2
+                    </motion.p>
+                    <motion.p
+                        custom={3}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-lg text-white/50 max-w-xl mx-auto mb-10"
+                    >
+                        The most powerful and advanced iPad ever. With the M2 chip, 12.9&quot; Liquid Retina XDR display, and Apple Pencil hover.
+                    </motion.p>
+
+                    <motion.div
+                        custom={4}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="flex flex-col sm:flex-row gap-4 justify-center"
+                    >
+                        <Link
+                            href="/buy"
+                            className="px-8 py-4 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
                         >
-                            <div className="w-1.5 h-3 bg-white/60 rounded-full" />
-                        </motion.div>
+                            Buy iPad Pro
+                        </Link>
+                        <Link
+                            href="/specs"
+                            className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full transition-all backdrop-blur-sm"
+                        >
+                            Learn More
+                        </Link>
                     </motion.div>
                 </div>
-            </div>
+
+                {/* Scroll hint */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2 }}
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                >
+                    <span className="text-white/40 text-sm">Scroll to explore</span>
+                    <motion.div
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{ repeat: Infinity, duration: 1.5 }}
+                        className="w-5 h-8 rounded-full border-2 border-white/30 flex items-start justify-center p-1.5"
+                    >
+                        <div className="w-1 h-2 bg-white/50 rounded-full" />
+                    </motion.div>
+                </motion.div>
+            </section>
 
             {/* Product Image Section */}
             <section className="relative bg-gradient-to-b from-[#0d0d0d] to-purple-900/20 py-24 px-6">
                 <div className="max-w-6xl mx-auto">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8 }}
+                        variants={scaleIn}
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
                         className="relative aspect-[16/10] rounded-3xl overflow-hidden bg-gradient-to-br from-purple-900/30 to-blue-900/30 backdrop-blur-xl border border-white/10 flex items-center justify-center"
                     >
@@ -154,7 +183,7 @@ export default function IPadPage() {
                             {
                                 icon: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z",
                                 title: "Apple Pencil",
-                                description: "Hover, tilt, and pressure for  perfect precision",
+                                description: "Hover, tilt, and pressure for perfect precision",
                                 gradient: "from-green-500 to-teal-600"
                             }
                         ].map((feature, index) => (

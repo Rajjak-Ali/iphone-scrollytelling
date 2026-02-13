@@ -1,64 +1,96 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
 
+const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.7, delay: i * 0.15, ease: [0.25, 0.4, 0.25, 1] as const },
+    }),
+};
+
 export default function AirPodsPage() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"],
-    });
-
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const opacity1 = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-    const opacity2 = useTransform(scrollYProgress, [0.25, 0.55], [0, 1]);
-    const opacity3 = useTransform(scrollYProgress, [0.5, 0.8], [0, 1]);
-
     return (
         <main className="relative bg-white">
             {/* Hero */}
-            <div ref={containerRef} className="relative" style={{ height: "400vh" }}>
-                <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center bg-white">
-                    <motion.div style={{ y }} className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-white">
+                {/* Soft radial gradient */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1.5 }}
+                    className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white"
+                />
 
-                    <div className="relative z-10 text-center px-6">
-                        <motion.div style={{ opacity: opacity1 }}>
-                            <h1 className="text-7xl md:text-9xl font-bold text-black mb-6">
-                                AirPods Pro
-                            </h1>
-                            <p className="text-3xl md:text-5xl text-black/70">
-                                Adaptive Audio
-                            </p>
-                        </motion.div>
+                {/* Subtle floating shapes */}
+                <motion.div
+                    animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
+                    transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
+                    className="absolute top-1/3 right-1/4 w-72 h-72 bg-blue-100/50 rounded-full blur-3xl"
+                />
+                <motion.div
+                    animate={{ y: [0, 12, 0], rotate: [0, -3, 0] }}
+                    transition={{ repeat: Infinity, duration: 9, ease: "easeInOut", delay: 2 }}
+                    className="absolute bottom-1/3 left-1/4 w-60 h-60 bg-purple-100/40 rounded-full blur-3xl"
+                />
 
-                        <motion.div style={{ opacity: opacity2 }} className="absolute inset-0 flex items-center justify-center">
-                            <div>
-                                <h2 className="text-6xl md:text-8xl font-bold text-black mb-4">
-                                    Personalized
-                                </h2>
-                                <p className="text-2xl md:text-4xl text-black/60">
-                                    Spatial Audio with head tracking
-                                </p>
-                            </div>
-                        </motion.div>
-
-                        <motion.div style={{ opacity: opacity3 }} className="absolute inset-0 flex items-center justify-center">
-                            <div>
-                                <h2 className="text-6xl md:text-8xl font-bold text-black mb-4">
-                                    Up to 6 hours
-                                </h2>
-                                <p className="text-2xl md:text-4xl text-black/60">
-                                    Listening time on one charge
-                                </p>
-                            </div>
-                        </motion.div>
-                    </div>
+                <div className="relative z-10 text-center px-6">
+                    <motion.p
+                        custom={0}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-blue-500 text-sm font-medium tracking-wider uppercase mb-6"
+                    >
+                        Adaptive Audio. Personalized Spatial Audio.
+                    </motion.p>
+                    <motion.h1
+                        custom={1}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-7xl md:text-9xl font-bold text-black mb-6"
+                    >
+                        AirPods Pro
+                    </motion.h1>
+                    <motion.p
+                        custom={2}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-2xl md:text-4xl text-black/60 mb-4"
+                    >
+                        Up to 6 hours listening time
+                    </motion.p>
+                    <motion.p
+                        custom={3}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-lg text-black/40 max-w-xl mx-auto mb-10"
+                    >
+                        Rebuilt from the sound up. Featuring Active Noise Cancellation, Adaptive Transparency, and Personalized Spatial Audio with head tracking.
+                    </motion.p>
+                    <motion.div
+                        custom={4}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                    >
+                        <Link
+                            href="/buy"
+                            className="px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+                        >
+                            Buy AirPods Pro
+                        </Link>
+                    </motion.div>
                 </div>
-            </div>
+            </section>
 
             {/* Product Image Section */}
             <section className="relative bg-gradient-to-b from-white via-gray-50 to-white py-24 px-6">
@@ -118,8 +150,8 @@ export default function AirPodsPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: i * 0.15 }}
                                 viewport={{ once: true }}
-                                whileHover={{ scale: 1.05 }}
-                                className="p-8 rounded-3xl bg-gradient-to-br from-gray-900 to-black border border-white/10"
+                                whileHover={{ scale: 1.05, y: -8 }}
+                                className="p-8 rounded-3xl bg-gradient-to-br from-gray-900 to-black border border-white/10 hover:border-white/20 transition-all"
                             >
                                 <svg className="w-12 h-12 text-blue-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={feature.icon} />

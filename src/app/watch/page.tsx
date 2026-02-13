@@ -1,67 +1,99 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
 
+const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.7, delay: i * 0.15, ease: [0.25, 0.4, 0.25, 1] as const },
+    }),
+};
+
 export default function WatchPage() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"],
-    });
-
-    const opacity1 = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-    const opacity2 = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
-    const opacity3 = useTransform(scrollYProgress, [0.45, 0.75], [0, 1]);
-    const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
-
     return (
         <main className="relative bg-black">
             {/* Hero Section */}
-            <div ref={containerRef} className="relative" style={{ height: "400vh" }}>
-                <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+                {/* Animated gradient background */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 1.3 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.8, ease: "easeOut" }}
+                    className="absolute inset-0 bg-gradient-to-br from-red-900/30 via-pink-900/30 to-orange-900/30"
+                />
+
+                {/* Animated rings */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 0.15, scale: 1 }}
+                    transition={{ duration: 2, delay: 0.5 }}
+                    className="absolute w-[600px] h-[600px] border border-white/10 rounded-full"
+                />
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.3 }}
+                    animate={{ opacity: 0.1, scale: 1 }}
+                    transition={{ duration: 2.5, delay: 0.8 }}
+                    className="absolute w-[900px] h-[900px] border border-white/5 rounded-full"
+                />
+
+                <div className="relative z-10 text-center px-6">
+                    <motion.p
+                        custom={0}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-red-400 text-sm font-medium tracking-wider uppercase mb-6"
+                    >
+                        The most rugged Apple Watch
+                    </motion.p>
+                    <motion.h1
+                        custom={1}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-7xl md:text-9xl font-bold text-white mb-6"
+                    >
+                        Apple Watch
+                    </motion.h1>
+                    <motion.p
+                        custom={2}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-3xl md:text-5xl text-white/80 mb-4"
+                    >
+                        Ultra 2
+                    </motion.p>
+                    <motion.p
+                        custom={3}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-lg text-white/50 max-w-xl mx-auto mb-10"
+                    >
+                        Titanium. 49mm display. 100m water resistant. The biggest, brightest, most rugged Apple Watch ever.
+                    </motion.p>
                     <motion.div
-                        style={{ scale, rotate: opacity1 }}
-                        className="absolute inset-0 bg-gradient-to-br from-red-900/30 via-pink-900/30 to-orange-900/30"
-                    />
-
-                    <div className="relative z-10 text-center px-6">
-                        <motion.div style={{ opacity: opacity1 }}>
-                            <h1 className="text-7xl md:text-9xl font-bold text-white mb-6">
-                                Apple Watch
-                            </h1>
-                            <p className="text-3xl md:text-5xl text-white/80">
-                                Ultra 2
-                            </p>
-                        </motion.div>
-
-                        <motion.div style={{ opacity: opacity2 }} className="absolute inset-0 flex items-center justify-center">
-                            <div>
-                                <h2 className="text-6xl md:text-8xl font-bold text-white mb-4">
-                                    Titanium
-                                </h2>
-                                <p className="text-2xl md:text-4xl text-white/70">
-                                    Rugged and refined
-                                </p>
-                            </div>
-                        </motion.div>
-
-                        <motion.div style={{ opacity: opacity3 }} className="absolute inset-0 flex items-center justify-center">
-                            <div>
-                                <h2 className="text-6xl md:text-8xl font-bold text-white mb-4">
-                                    49mm Display
-                                </h2>
-                                <p className="text-2xl md:text-4xl text-white/70">
-                                    The biggest, brightest
-                                </p>
-                            </div>
-                        </motion.div>
-                    </div>
+                        custom={4}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="flex flex-col sm:flex-row gap-4 justify-center"
+                    >
+                        <Link
+                            href="/buy"
+                            className="px-8 py-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-500/25"
+                        >
+                            Buy Apple Watch Ultra 2
+                        </Link>
+                    </motion.div>
                 </div>
-            </div>
+            </section>
 
             {/* Product Image Section */}
             <section className="relative bg-gradient-to-b from-black to-red-900/10 py-24 px-6">
@@ -131,7 +163,8 @@ export default function WatchPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: i * 0.1 }}
                                 viewport={{ once: true }}
-                                className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 text-center"
+                                whileHover={{ scale: 1.05, y: -5 }}
+                                className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 text-center hover:border-white/20 transition-all"
                             >
                                 <div className={`text-5xl md:text-7xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-4`}>
                                     {stat.title}
